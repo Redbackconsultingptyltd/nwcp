@@ -45,8 +45,14 @@ sap.ui.controller("zui5bsp.main", {
     	//var data = null;
     	
 		//var URL = 'http://cbr1saps01.internal.dotars.gov.au:8000/sap/bc/bsp/sap/zui5bspdata/address.htm';   
+		var responseJson = '{"ROOT":{"ISSUCCESSFUL":"X","ADDRESSES":[{"ADDRTYPE":"1","FROM":"2007-04-04","TO":"2008-01-04"},{"ADDRTYPE":"1","FROM":"2008-01-15","TO":"9999-12-31"},{"ADDRTYPE":"2","FROM":"2007-04-16","TO":"9999-12-31"},{"ADDRTYPE":"3","FROM":"2007-04-16","TO":"9999-12-31"},{"ADDRTYPE":"3","FROM":"2008-01-15","TO":"9999-12-31"},{"ADDRTYPE":"3","FROM":"2011-10-08","TO":"9999-12-31"}],"MESSAGES":[]}}';
+    	var oModel = new sap.ui.model.json.JSONModel();
+        oModel.setJSON(responseJson,false);
+        sap.ui.getCore().setModel(oModel);
+    	/*
 		var URL	=	'http://cbr1saps01.internal.dotars.gov.au:8000/zdoit/zui5/';
     	var data = '{"ROOT":{"EMPLOYEENUMBER":"53723288"}}';    	
+    	
     	$.ajax(
     	{ 
 			 type: 'POST', 
@@ -75,5 +81,6 @@ sap.ui.controller("zui5bsp.main", {
 				 
 			 }
 		});
+		*/
 	}
 });
