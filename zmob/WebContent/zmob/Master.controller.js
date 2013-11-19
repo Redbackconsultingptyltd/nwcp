@@ -7,36 +7,46 @@ sap.ui.controller("zmob.Master", {
 */
 	onInit: function() {
 		var URL	=	'http://cbr1saps01.internal.dotars.gov.au:8000/zdoit/zui5/';
-    	var data = '{"ROOT":{"EMPLOYEENUMBER":"53723288"}}';    	
-    	$.ajax(
-    	{ 
-			 type: 'POST', 
-			 url: URL,
-			 data: data,
-			 dataType: 'json',
-			 cache: false,
-			 contentType: "application/json; charset=\"utf-8\"",
-			 beforeSend: function( xhr ){
-				// Set up any header data .
-				//	xhr.setRequestHeader(<name>,<value>);
-				 return;
-				},			 
-			 success: function(data) {
-				 //alert(data);
-				 //var oJSONData = new sap.ui.model.json.JSONModel();
-				 //oJSONData.setData(data, false);
-				 //alert(oJSONData.getJSON());
-//				 var oModel = sap.ui.getCore().getModel("MainModel");
-	//			 oModel.setData(data,true);
-					var oModel = new sap.ui.model.json.JSONModel();
-					oModel.setData(data,false);
-					//alert(oModel.getJSON());
-			    	//sap.ui.getCore().setModel(oModel,"MainModel2");
-					sap.ui.getCore().setModel(oModel);
-				 
-			 }
-		});
-	},
+    	var data = '{"ROOT":{"EMPLOYEENUMBER":"53723288"}}';   
+    	var responseJson = '{"ROOT":{"ISSUCCESSFUL":"X","ADDRESSES":[{"ADDRTYPE":"1","FROM":"2007-04-04","TO":"2008-01-04"},{"ADDRTYPE":"1","FROM":"2008-01-15","TO":"9999-12-31"},{"ADDRTYPE":"2","FROM":"2007-04-16","TO":"9999-12-31"},{"ADDRTYPE":"3","FROM":"2007-04-16","TO":"9999-12-31"},{"ADDRTYPE":"3","FROM":"2008-01-15","TO":"9999-12-31"},{"ADDRTYPE":"3","FROM":"2011-10-08","TO":"9999-12-31"}],"MESSAGES":[]}}';
+        if(sap.app.config.useLocalData == "false")
+        {
+	    	$.ajax(
+	    	{ 
+				 type: 'POST', 
+				 url: URL,
+				 data: data,
+				 dataType: 'json',
+				 cache: false,
+				 contentType: "application/json; charset=\"utf-8\"",
+				 beforeSend: function( xhr ){
+					// Set up any header data .
+					//	xhr.setRequestHeader(<name>,<value>);
+					 return;
+					},			 
+				 success: function(data) {
+					 //alert(data);
+					 //var oJSONData = new sap.ui.model.json.JSONModel();
+					 //oJSONData.setData(data, false);
+					 //alert(oJSONData.getJSON());
+	//				 var oModel = sap.ui.getCore().getModel("MainModel");
+		//			 oModel.setData(data,true);
+						var oModel = new sap.ui.model.json.JSONModel();
+						oModel.setData(data,false);
+						//alert(oModel.getJSON());
+				    	//sap.ui.getCore().setModel(oModel,"MainModel2");
+						sap.ui.getCore().setModel(oModel);
+					 
+				 }
+			});
+        }
+        else
+        	{
+        	var oModel = new sap.ui.model.json.JSONModel();
+            oModel.setJSON(responseJson,false);
+            sap.ui.getCore().setModel(oModel);
+        	}
+        },
 
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
